@@ -6,17 +6,21 @@
 ## Build Setup
 
 ```bash
-# install dependencies
+# Instale as dependências
 $ npm install
 
-# serve with hot reload at localhost:3000
+# Servidor configurado para localhost:3000
 $ npm run dev
 
-# build for production and launch server
+# Localhost IP compartilhado (rodar o projeto em mobile)
+$ npm run dev:shared
+
+# Build para Production & Iniciar o servidor
+$ npm run generate
 $ npm run build
 $ npm run start
 
-# generate static project
-$ npm run generate
+
+
 ```
 
