@@ -46,7 +46,7 @@ export default Vue.extend({
 
   padding: 0.5rem 1rem;
   width: 100%;
-  border: 2px solid color(dark, darkest);
+  border: 3px  solid color(dark, darkest);
   border-radius: 8px;
 
   button {
