@@ -1,9 +1,9 @@
-# iBook Desafio
-Desafio do curso cataline.
+# iBook Desafio - Nuxt JS
+![](print.png)
 
-## Demo
+Demo: https://ibook-pvictorf.herokuapp.com/
 
-https://ibook-pvictorf.herokuapp.com/
+
 
 ## Build Setup
 
