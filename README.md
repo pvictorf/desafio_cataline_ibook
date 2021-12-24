@@ -1,7 +1,9 @@
-# nuxt-ts
+# iBook Desafio
+Desafio do curso cataline.
 
 ## Demo
 
+https://ibook-pvictorf.herokuapp.com/
 
 ## Build Setup
 
