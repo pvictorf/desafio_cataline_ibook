@@ -4,9 +4,24 @@
       <h2>Lançamentos</h2>
       <BookSearchSuggets />
     </div>
+
+    <h3 v-if="$lastSearch">Resultado(s) da pesquisa "{{$lastSearch}}"</h3>
     <BookList />
   </section>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { books } from '~/store'
+
+export default Vue.extend({
+    computed: {
+      $lastSearch() {
+        return books.$lastSearch
+      }
+    }
+})
+</script>
 
 <style lang="scss" scoped>
 .releases {

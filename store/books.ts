@@ -6,15 +6,12 @@ interface Show {
   id: Book['id']
 }
 
-interface Suggets {
-  title: Book['title']
-}
-
 @Module({ name: 'books', stateFactory: true, namespaced: true })
 export default class Books extends VuexModule {
   private books = [] as Book[]
   private book = {} as Book
   private suggestBooks = [] as Book[]
+  private lastSearch = ''
   private loading = false
 
   public get $all() {
@@ -31,6 +28,10 @@ export default class Books extends VuexModule {
 
   public get $isLoading() {
     return this.loading
+  }
+
+  public get $lastSearch() {
+    return this.lastSearch
   }
 
   @Mutation
@@ -51,6 +52,11 @@ export default class Books extends VuexModule {
   @Mutation
   public SET_LOADING(loading: boolean) {
     this.loading = loading
+  }
+
+  @Mutation
+  public SET_LASTSEARCH(search: string) {
+    this.lastSearch = search
   }
 
   @Action
@@ -79,6 +85,7 @@ export default class Books extends VuexModule {
   @Action
   public async search(search = '') {
     const books = await $axios.$get(`/books?q=${search}`)
+    this.context.commit('SET_LASTSEARCH', search)
     this.context.commit('SET_ALL', books ?? [])
   }
 
