@@ -13,10 +13,10 @@
     async asyncData() {
       try {
         await books.index()
+        await books.suggets()
       } catch(e) {
-        console.log(e)
+        console.warn(e)
       }
-      
     }
   })
 </script>

@@ -6,10 +6,16 @@ interface Show {
   id: Book['id']
 }
 
+interface Suggets {
+  title: Book['title']
+}
+
 @Module({ name: 'books', stateFactory: true, namespaced: true })
 export default class Books extends VuexModule {
   private books = [] as Book[]
   private book = {} as Book
+  private suggestBooks = [] as Book[]
+  private loading = false
 
   public get $all() {
     return this.books
@@ -17,6 +23,14 @@ export default class Books extends VuexModule {
 
   public get $single() {
     return this.book
+  }
+
+  public get $suggestBooks() {
+    return this.suggestBooks
+  }
+
+  public get $isLoading() {
+    return this.loading
   }
 
   @Mutation
@@ -29,6 +43,16 @@ export default class Books extends VuexModule {
     this.book = book
   }
 
+  @Mutation
+  public SET_SUGGETS(books: Book[]) {
+    this.suggestBooks = books
+  }
+
+  @Mutation
+  public SET_LOADING(loading: boolean) {
+    this.loading = loading
+  }
+
   @Action
   public async index() {
     const books = await $axios.$get('/books')
@@ -39,5 +63,27 @@ export default class Books extends VuexModule {
   public async show({ id }: Show) {
     const book = await $axios.$get(`/books/${id}`)
     this.context.commit('SET_SINGLE', book)
+  }
+
+  @Action
+  public async suggets(title = '') {
+    if(!title.trim()) {
+      this.context.commit('SET_SUGGETS', [])
+      return;
+    } 
+
+    const books = await $axios.$get(`/books?title_like=${title}`)
+    this.context.commit('SET_SUGGETS', books ?? [])
+  }
+
+  @Action
+  public async search(search = '') {
+    const books = await $axios.$get(`/books?q=${search}`)
+    this.context.commit('SET_ALL', books ?? [])
+  }
+
+  @Action
+  isLoading(loading: boolean) {
+    this.context.commit('SET_LOADING', loading)
   }
 }
