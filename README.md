@@ -1,5 +1,5 @@
 # iBook Desafio - Nuxt JS
-![](print.png)
+![](print.gif)
 
 Demo: https://ibook-pvictorf.herokuapp.com/
 
